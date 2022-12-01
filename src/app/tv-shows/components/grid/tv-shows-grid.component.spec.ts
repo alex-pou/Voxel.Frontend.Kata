@@ -73,7 +73,7 @@ describe('TvShowsGridComponent should', () => {
     expect(showTitles.length).toBe(6);
   })
 
-  fit('show six shows images', () => {
+  it('show six shows images', () => {
     spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
 
     component.ngOnInit();
