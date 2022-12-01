@@ -61,39 +61,28 @@ describe('TvShowsGridComponent should', () => {
     expect(component).toBeTruthy();
   });
 
-  it('show six shows title', () => {
+  it('only render six tv shows', () => {
+    spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(component.shows.length).toBe(6);
+  })
+
+  it('render title, image and rating for each show', () => {
     spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
 
     component.ngOnInit();
     fixture.detectChanges();
 
     const showTitles = fixture.debugElement.queryAll(By.css('.show-title'));
+    const showImages = fixture.debugElement.queryAll(By.css('.show-image'));
+    const showRatings = fixture.debugElement.queryAll(By.css('.show-rating'));
 
-    expect(component.shows.length).toBe(6);
     expect(showTitles.length).toBe(6);
-  })
+    expect(showImages.length).toBe(6);
+    expect(showRatings.length).toBe(6);
 
-  it('show six shows images', () => {
-    spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
-
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    const showTitles = fixture.debugElement.queryAll(By.css('.show-image'));
-
-    expect(component.shows.length).toBe(6);
-    expect(showTitles.length).toBe(6);
-  })
-
-  it('show six shows ratings', () => {
-    spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
-
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    const showTitles = fixture.debugElement.queryAll(By.css('.show-rating'));
-
-    expect(component.shows.length).toBe(6);
-    expect(showTitles.length).toBe(6);
   })
 });
