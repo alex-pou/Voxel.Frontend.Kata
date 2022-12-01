@@ -84,4 +84,16 @@ describe('TvShowsGridComponent should', () => {
     expect(component.shows.length).toBe(6);
     expect(showTitles.length).toBe(6);
   })
+
+  it('show six shows ratings', () => {
+    spyOn(tvShowsService, 'getShows').and.returnValue(of(expectedResponse));
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const showTitles = fixture.debugElement.queryAll(By.css('.show-rating'));
+
+    expect(component.shows.length).toBe(6);
+    expect(showTitles.length).toBe(6);
+  })
 });
